@@ -1,0 +1,65 @@
+---
+title: "Flex dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(p8105.datasets)
+library(plotly)
+```
+
+In this example, we'll choose NOAA as data setting.
+
+```{r set up the figures}
+weather_df = 
+  rnoaa::meteo_pull_monitors(c("USW00094728", "USC00519397", "USS0023B17S"),
+                      var = c("PRCP", "TMIN", "TMAX"), 
+                      date_min = "2017-01-01",
+                      date_max = "2017-12-31") %>%
+  mutate(
+    name = recode(id, USW00094728 = "CentralPark_NY", 
+                      USC00519397 = "Waikiki_HA",
+                      USS0023B17S = "Waterhole_WA"),
+    tmin = round(tmin / 10, digits = 1),
+    tmax = round(tmax / 10, digits = 1)) %>%
+  select(name, id, everything()) 
+```
+
+
+Column {data-width = 650}
+-----------------------------------------------------------------------
+
+### Scatter plot of min to max temperatures 
+
+```{r}
+weather_df %>% 
+  plot_ly(
+    x = ~tmin, y = ~tmax, type = "scatter", mode = "markers",
+    color = ~name, alpha = 0.5)
+```
+
+Column {data-width = 350}
+-----------------------------------------------------------------------
+
+### Box plot of max temperatures
+
+```{r}
+weather_df %>% 
+  plot_ly(y = ~tmax, color = ~name, type = "box")
+
+```
+
+### Days count with maximum temperature > 5
+
+```{r}
+weather_df %>% 
+  filter(tmax > 5) %>% 
+  count(name) %>% 
+  plot_ly(x = ~name, y = ~n, color = ~name, type = "bar")
+```
+
