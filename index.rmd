@@ -1,0 +1,28 @@
+---
+title: "Gavin Ko webiste"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+# Intro
+
+Welcome to my personal website!
+I'm Gavin Ko, a master student in Columbia Mailman School of Public Health with Biostatistics major.
+
+# Links
+
+You can learn more [about me](about.html) by clicking the link or that on the upper-right.   
+To contact me, check the icons on the up-right.     
+If you're interested in my schoool, please check [Columbia Mailman](https://www.mailman.columbia.edu/).
+
+# Flexdashboard example
+
+For dashboard example, please check the link [flex](flex.html).
+
+
+
+
+
+
