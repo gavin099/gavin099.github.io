@@ -6,6 +6,6 @@ output:
     toc_float: true
 ---
 
-This is my resume shown below. 
+This is my resume with academic and work experience.
 
 <iframe src="cv.pdf" width="100%" height="100%">
